@@ -42,7 +42,7 @@ void myQueue<T>::enqueue(T item) {
         return;
     }
     contents[rear] = item;
-    rear = (rear + 1) % arrayLength;
+    rear = (rear + 1) % arrayLength; 
 }
 
 template <class T>
@@ -52,7 +52,7 @@ T myQueue<T>::dequeue() {
         return T(); // Similar to returning -1 garbage value for stacks
     }
     T item = contents[front];
-    front = (front + 1) % arrayLength;
+    front = (front + 1) % arrayLength; //Simply makes front wrap back around to the index 0 when flowing over arrayLength
     return item;
 }
 
@@ -68,6 +68,7 @@ bool myQueue<T>::isEmpty() {
 
 template <class T>
 bool myQueue<T>::isFull() {
+	//front=rear would make full true but in this case we will keep one slot open since we do not have a counter variable
 	return (rear+1) % arrayLength == front;
 }
 
