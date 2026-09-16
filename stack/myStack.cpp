@@ -47,8 +47,8 @@ void myStack::push(int element) {
 		cerr << "Error: Stack overflow. Cannot push to a full stack." << endl;
 		return;
 	}
-	contents[top] = element;
 	top++;
+	contents[top] = element;
 }
 
 int myStack::pop() {
@@ -57,7 +57,8 @@ int myStack::pop() {
 		return -1;
 	}
 	top--;
-	return contents[top];
+	return contents[top+1];
+
 }
 
 /*
