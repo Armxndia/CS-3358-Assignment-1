@@ -14,7 +14,10 @@ using namespace std;
  */
 
 myStack::myStack(int maxSz) {
-	// TODO
+	maxSize = maxSz;
+	//-1 since top being 0 is an index and can be confusing to implement isEmpty()
+	top = -1;
+	contents = new int[maxSize];
 }
 
 
@@ -25,7 +28,7 @@ myStack::myStack(int maxSz) {
  */
 
 myStack::~myStack() {
-	// TODO
+	delete[] contents;
 }
 
 /*
@@ -40,11 +43,21 @@ myStack::~myStack() {
  */
 
 void myStack::push(int element) {
-	// TODO		
+	if (isFull()) {
+		cerr << "Error: Stack overflow. Cannot push to a full stack." << endl;
+		return;
+	}
+	contents[top] = element;
+	top++;
 }
 
 int myStack::pop() {
-	// TODO
+	if (isEmpty()){
+		cerr << "Error: Stack underflow. Cannot pop from a empty stack." << endl;
+		return -1;
+	}
+	top--;
+	return contents[top];
 }
 
 /*
@@ -56,10 +69,12 @@ int myStack::pop() {
  */
 
 bool myStack::isEmpty() const {
-	// TODO
+	//top == 0 could be non empty with an element at 0 so we use -1
+	return top == -1;
 }
 
 bool myStack::isFull() const {
-	// TODO
+	//10 max size = 0-9 indices so top would be maxSize-1 if full
+	return top == maxSize-1;
 }
 
