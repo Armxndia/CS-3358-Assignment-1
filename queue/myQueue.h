@@ -1,5 +1,6 @@
 #ifndef _MYQUEUE_H_
 #define _MYQUEUE_H_
+#include <iostream>
 
 using namespace std;
 
@@ -23,37 +24,51 @@ private:
 
 template <class T>
 myQueue<T>::myQueue(int maxSz) {
-	// TODO
+	arrayLength = maxSz;
+	contents = new T[arrayLength];
+	front = 0;
+	rear = 0;
 }
 
 template <class T>
 myQueue<T>::~myQueue() {
-	// TODO
+	delete[] contents;
 }
 
 template <class T>
 void myQueue<T>::enqueue(T item) {
-	// TODO
+	if (isFull()) {
+        cerr << "Queue is full. Cannot enqueue." << endl;
+        return;
+    }
+    contents[rear] = item;
+    rear = (rear + 1) % arrayLength;
 }
 
 template <class T>
 T myQueue<T>::dequeue() {
-	// TODO
+	if (isEmpty()) {
+        cerr << "Queue is empty. Cannot dequeue." << endl;
+        return T(); // Similar to returning -1 garbage value for stacks
+    }
+    T item = contents[front];
+    front = (front + 1) % arrayLength;
+    return item;
 }
 
 template <class T>
 int myQueue<T>::currentSize() {
-	// TODO
+	return (rear - front + arrayLength) % arrayLength;
 }
 
 template <class T>
 bool myQueue<T>::isEmpty() {
-	// TODO
+	return front==rear;
 }
 
 template <class T>
 bool myQueue<T>::isFull() {
-	// TODO
+	return (rear+1) % arrayLength == front;
 }
 
 #endif
