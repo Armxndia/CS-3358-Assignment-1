@@ -31,13 +31,13 @@ void postfixTest() {
 
 		else if (inputHolder == '+' || inputHolder == '-' || inputHolder == '*' || inputHolder == '/') {
             if (operandStack.isEmpty()) {
-                cerr << "Error: Not enough operands (stack is empty)." << endl;
+                cerr << "Error: Not enough operands (stack is empty)." << endl; //If empty before popping once stack is empty
                 break;
             }
             int operand2 = operandStack.pop(); // Top element is right operand [4 5 +] = 4 + 5 (im assuming this is what is intended from the example in pdf)
             
             if (operandStack.isEmpty()) {
-                cerr << "Error: Not enough operands (stack is empty)." << endl;
+                cerr << "Error: Not enough operands (stack only has 1 element)." << endl; //If empty after popping once stack had 1 element (duh)
                 break;
             }
             int operand1 = operandStack.pop(); // Next element is left operand
